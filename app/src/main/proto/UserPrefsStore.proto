@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_package = "com.example.skilllink.data.local.serializers";
+option java_multiple_files = true;
+
+message User {
+  string id = 1;
+  string email = 2;
+  string userName = 3;
+  bool has_spin = 4;
+  string realName = 5;
+  string bio = 6;
+  string profile_image_path = 7;
+  bool darkMode = 8;
+  repeated string followers = 9;
+  repeated string following = 10;
+}
