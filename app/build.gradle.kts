@@ -51,6 +51,9 @@ android {
 }
 
 dependencies {
+    // for theme purpose
+    implementation(libs.androidx.appcompat)
+
     // proto datastore with protobuf files
     implementation(libs.androidx.datastore)
     implementation(libs.androidx.datastore.proto)

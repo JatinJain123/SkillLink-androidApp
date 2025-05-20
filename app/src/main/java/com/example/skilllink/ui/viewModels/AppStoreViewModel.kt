@@ -2,7 +2,7 @@ package com.example.skilllink.ui.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.skilllink.data.local.AppStoreManager
+import com.example.skilllink.data.local.managers.AppStoreManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

@@ -3,7 +3,7 @@ package com.example.skilllink.di
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
-import com.example.skilllink.data.local.AppStoreManager
+import com.example.skilllink.data.local.managers.AppStoreManager
 import com.example.skilllink.data.local.serializers.AppUser
 import com.example.skilllink.data.local.serializers.AppStoreSerializer
 import dagger.Module
@@ -17,6 +17,8 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DataStoreModule {
+
+    // Providing App level datastore
     @Provides
     @Singleton
     fun providesAppStore(

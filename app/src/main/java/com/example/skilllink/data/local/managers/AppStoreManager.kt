@@ -1,4 +1,4 @@
-package com.example.skilllink.data.local
+package com.example.skilllink.data.local.managers
 
 import androidx.datastore.core.DataStore
 import com.example.skilllink.data.local.serializers.AppUser
