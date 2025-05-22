@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 sealed class Screens {
     @Serializable
-    object LoginScreen
+    data object LoginScreen
 
     @Serializable
-    object DashBoard
+    data object DashBoard
 }
