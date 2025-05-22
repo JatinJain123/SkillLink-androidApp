@@ -6,8 +6,7 @@ import com.example.skilllink.ui.viewModels.UserPrefsStoreViewModel
 
 data class AppDependencies (
     val appStoreViewModel: AppStoreViewModel,
-    val userPrefsStoreViewModel: UserPrefsStoreViewModel?,
-    val isDarkTheme: Boolean
+    val userPrefsStoreViewModel: UserPrefsStoreViewModel?
 )
 
 val LocalAppDependencies = staticCompositionLocalOf<AppDependencies> {

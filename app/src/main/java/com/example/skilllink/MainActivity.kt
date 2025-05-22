@@ -20,6 +20,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.skilllink.data.local.providers.UserPrefsStoreManagerProvider
 import com.example.skilllink.domain.model.local.AppDependencies
 import com.example.skilllink.domain.model.local.LocalAppDependencies
+import com.example.skilllink.domain.model.local.LocalUiStates
+import com.example.skilllink.domain.model.local.UiStates
 import com.example.skilllink.ui.navigation.NavGraph
 import com.example.skilllink.ui.screens.animatedComponents.SplashScreen
 import com.example.skilllink.ui.theme.SkillLinkTheme
@@ -41,10 +43,11 @@ class MainActivity : ComponentActivity() {
             val userId by appStoreViewModel.currentUser.collectAsState()
 
             var userPrefsStoreViewModel: UserPrefsStoreViewModel? by remember { mutableStateOf(null) }
-            var isDarkTheme by remember { mutableStateOf(false) }
+            var isDarkTheme by remember { mutableStateOf(true) }
+            var isUserSetupComplete by remember { mutableStateOf(false) }
 
             var minDelay by remember { mutableStateOf(false) }
-            var isThemeSetupComplete by remember { mutableStateOf(false) }
+            var isInitialSetupComplete by remember { mutableStateOf(false) }
 
             LaunchedEffect(Unit) {
                 delay(AppConstants.MIN_SPLASH_SCREEN_TIME)
@@ -60,26 +63,38 @@ class MainActivity : ComponentActivity() {
                     userPrefsStoreViewModel = ViewModelProvider(
                         this@MainActivity, userPrefsStoreViewModelFactory
                     )[UserPrefsStoreViewModel::class.java]
+                } else {
+                    isInitialSetupComplete = true
                 }
             }
 
-            val lightMode = userPrefsStoreViewModel?.lightMode?.collectAsState()?.value ?: false
-            LaunchedEffect(lightMode) {
-                isDarkTheme = when(lightMode) {
-                    true -> false
-                    false -> true
+            userPrefsStoreViewModel?.let { model ->
+                val username by model.userName.collectAsState()
+                val hasSpin by model.hasSpin.collectAsState()
+                val lightMode by model.lightMode.collectAsState()
+
+                LaunchedEffect(username, hasSpin, lightMode) {
+                    isDarkTheme = !lightMode
+                    isUserSetupComplete = username.isNotEmpty() && hasSpin
+                    isInitialSetupComplete = true
                 }
-                isThemeSetupComplete = true
             }
 
-            if(minDelay && isThemeSetupComplete) {
+            if(minDelay && isInitialSetupComplete) {
                 val appDependencies = AppDependencies(
                     appStoreViewModel = appStoreViewModel,
-                    userPrefsStoreViewModel = userPrefsStoreViewModel,
+                    userPrefsStoreViewModel = userPrefsStoreViewModel
+                )
+
+                val uiStates = UiStates(
+                    isUserSetupComplete = isUserSetupComplete,
                     isDarkTheme = isDarkTheme
                 )
 
-                CompositionLocalProvider(LocalAppDependencies provides appDependencies) {
+                CompositionLocalProvider(
+                    LocalAppDependencies provides appDependencies,
+                    LocalUiStates provides uiStates
+                ) {
                     SkillLinkTheme(darkTheme = isDarkTheme) {
                         Surface(
                             modifier = Modifier.fillMaxSize(),

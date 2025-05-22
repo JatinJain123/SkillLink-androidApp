@@ -7,8 +7,5 @@ sealed class Screens {
     object LoginScreen
 
     @Serializable
-    object SplashScreen
-
-    @Serializable
     object DashBoard
 }
