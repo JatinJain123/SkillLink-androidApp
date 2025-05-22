@@ -1,5 +1,6 @@
 package com.example.skilllink.ui.viewModels
 
+import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -10,7 +11,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class UserPrefsStoreViewModelFactory(
-    private val userPrefsStoreManager: UserPrefsStoreManager
+    private val userPrefsStoreManager: UserPrefsStoreManager,
 ): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(UserPrefsStoreViewModel::class.java)) {
@@ -48,7 +49,7 @@ class UserPrefsStoreViewModel(
         }
     }
 
-    fun setDarkMode(state: Boolean) {
+    fun setLightMode(state: Boolean) {
         viewModelScope.launch {
             userPrefsStoreManager.setLightMode(state)
         }

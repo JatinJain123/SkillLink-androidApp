@@ -1,6 +1,5 @@
 package com.example.skilllink.ui.screens.animatedComponents
 
-import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -16,9 +15,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -33,7 +29,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.skilllink.R
@@ -44,30 +39,21 @@ data class UseStates(
     var showLogo: Boolean = false,
     var showName: Boolean = false,
     var showTagline: Boolean = false,
-    var slideScreen: Boolean = false,
-    var signInBtn: Boolean = false
+    var loading: Boolean = false
 )
 
 private object SplashConstants {
-    const val AFTER_LOGO_DUR: Long = 400
-    const val AFTER_NAME_DUR: Long = 400
-    const val AFTER_TAG_DUR: Long = 800
-    const val AFTER_SLIDE_DUR: Long = 500
+    const val AFTER_LOGO_DUR: Long = 200
+    const val AFTER_NAME_DUR: Long = 200
+    const val AFTER_TAG_DUR: Long = 400
     const val LOGO_ANIM_DUR = 800
     const val NAME_ANIM_DUR = 600
     const val TAG_ANIM_DUR = 600
 }
 
 @Composable
-fun SplashScreen(
-    userIsPresent: Boolean,
-    navigation: () -> Unit
-) {
+fun SplashScreen() {
     val states = remember { mutableStateOf(UseStates()) }
-    val screenOffset by animateDpAsState(
-        targetValue = if (states.value.slideScreen) (-500).dp else 0.dp,
-        animationSpec = tween(500, easing = FastOutLinearInEasing)
-    )
 
     LaunchedEffect(Unit) {
         states.value = states.value.copy(showLogo = true)
@@ -76,24 +62,12 @@ fun SplashScreen(
         delay(SplashConstants.AFTER_NAME_DUR)
         states.value = states.value.copy(showTagline = true)
         delay(SplashConstants.AFTER_TAG_DUR)
-        if(userIsPresent) {
-            states.value = states.value.copy(slideScreen = true)
-        } else {
-            states.value = states.value.copy(signInBtn = true)
-        }
-    }
-
-    LaunchedEffect(states.value.slideScreen) {
-        if(states.value.slideScreen) {
-            delay(SplashConstants.AFTER_SLIDE_DUR)
-            navigation()
-        }
+        states.value = states.value.copy(loading = true)
     }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .offset(x = screenOffset)
             .background(Color.Black)
     ) {
         Column(
@@ -118,12 +92,7 @@ fun SplashScreen(
                 .fillMaxHeight(0.15f)
                 .align(Alignment.BottomCenter)
         ) {
-            SignInBtn(
-                visible = states.value.signInBtn,
-                onClick = {
-                    states.value = states.value.copy(slideScreen = true)
-                }
-            )
+            ShowLoading(visible = states.value.loading)
         }
     }
 }
@@ -204,24 +173,14 @@ fun Tagline(visible: Boolean) {
 }
 
 @Composable
-fun SignInBtn(visible: Boolean, onClick: () -> Unit) {
+fun ShowLoading(visible: Boolean) {
     if(visible) {
-        Button(
-            onClick = {onClick()},
-            colors = ButtonColors(
-                containerColor = VeryLightGray,
-                contentColor = VeryLightGray,
-                disabledContainerColor = VeryLightGray,
-                disabledContentColor = VeryLightGray
-            ),
-            shape = RoundedCornerShape(16.dp)
-        ) {
-            Text(
-                text = "SignIn  /  SignUp",
-                color = Color.Black,
-                fontWeight = FontWeight.Medium,
-                fontSize = 16.sp
-            )
-        }
+        Text(
+            text = "Loading ...",
+            fontSize = 32.sp,
+            fontFamily = FontFamily(Font(R.font.caveat_brush_font)),
+            fontStyle = FontStyle.Italic,
+            color = Color.LightGray
+        )
     }
 }
