@@ -1,6 +1,5 @@
 package com.example.skilllink.ui.viewModels
 
-import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope

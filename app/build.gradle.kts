@@ -1,4 +1,5 @@
 import com.google.protobuf.gradle.GenerateProtoTask
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -9,6 +10,13 @@ plugins {
     id("com.google.protobuf")
     id("org.jetbrains.kotlin.plugin.serialization")
 }
+
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.inputStream())
+}
+
 
 android {
     namespace = "com.example.skilllink"
@@ -24,8 +32,17 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        compose = true
+        buildConfig = true
+    }
+
     buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"${localProperties.getProperty("BASE_URL")}\"")
+        }
         release {
+            buildConfigField("String", "BASE_URL", "\"${localProperties.getProperty("BASE_URL")}\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

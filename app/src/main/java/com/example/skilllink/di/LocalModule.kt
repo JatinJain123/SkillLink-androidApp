@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import com.example.skilllink.data.local.managers.AppStoreManager
-import com.example.skilllink.data.local.serializers.AppUser
 import com.example.skilllink.data.local.serializers.AppStoreSerializer
+import com.example.skilllink.data.local.serializers.AppUser
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
