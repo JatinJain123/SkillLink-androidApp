@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.screens.animatedComponents
+package com.example.skilllink.ui.screens.reusableComponents
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState

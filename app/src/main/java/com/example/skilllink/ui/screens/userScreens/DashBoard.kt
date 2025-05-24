@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.screens.users
+package com.example.skilllink.ui.screens.userScreens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

@@ -15,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.skilllink.data.local.providers.UserPrefsStoreManagerProvider
@@ -23,7 +24,7 @@ import com.example.skilllink.domain.model.local.LocalAppDependencies
 import com.example.skilllink.domain.model.local.LocalUiStates
 import com.example.skilllink.domain.model.local.UiStates
 import com.example.skilllink.ui.navigation.NavGraph
-import com.example.skilllink.ui.screens.animatedComponents.SplashScreen
+import com.example.skilllink.ui.screens.reusableComponents.SplashScreen
 import com.example.skilllink.ui.theme.SkillLinkTheme
 import com.example.skilllink.ui.viewModels.AppStoreViewModel
 import com.example.skilllink.ui.viewModels.UserPrefsStoreViewModel
@@ -36,6 +37,7 @@ import kotlinx.coroutines.delay
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         enableEdgeToEdge()
         setContent {
             val applicationContext = LocalContext.current.applicationContext
@@ -85,7 +87,6 @@ class MainActivity : ComponentActivity() {
                     appStoreViewModel = appStoreViewModel,
                     userPrefsStoreViewModel = userPrefsStoreViewModel
                 )
-
                 val uiStates = UiStates(
                     isUserSetupComplete = isUserSetupComplete,
                     isDarkTheme = isDarkTheme

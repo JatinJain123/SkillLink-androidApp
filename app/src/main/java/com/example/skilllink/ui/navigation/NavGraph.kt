@@ -7,8 +7,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.skilllink.domain.model.local.LocalUiStates
-import com.example.skilllink.ui.screens.users.DashBoard
-import com.example.skilllink.ui.screens.authScreens.LoginScreen
+import com.example.skilllink.ui.screens.userScreens.DashBoard
+import com.example.skilllink.ui.screens.authScreens.LoginScreen1
+import com.example.skilllink.ui.screens.authScreens.LoginScreen2
+import com.example.skilllink.ui.screens.authScreens.LoginScreen3
 import com.example.skilllink.utils.AppConstants
 
 @Composable
@@ -19,9 +21,11 @@ fun NavGraph() {
 
     NavHost(
         navController = navController,
-        startDestination = if(isUserSetupComplete) Screens.DashBoard else Screens.LoginScreen
+        startDestination = if(isUserSetupComplete) Screens.DashBoard else Screens.LoginScreen1
     ) {
-        composable<Screens.LoginScreen>(
+
+        // Login screen step 1
+        composable<Screens.LoginScreen1>(
             enterTransition = {
                 slideIntoContainer(
                     AnimatedContentTransitionScope.SlideDirection.Right,
@@ -35,18 +39,47 @@ fun NavGraph() {
                 )
             }
         ) {
-            LoginScreen(
-                navigate = {
-                    navController.navigate(Screens.DashBoard) {
-                        popUpTo<Screens.LoginScreen> {
-                            inclusive = true
-                            saveState = true
-                        }
-                    }
-                }
-            )
+            LoginScreen1(navController = navController)
         }
 
+        // Login screen step 2
+        composable<Screens.LoginScreen2>(
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME),
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
+                )
+            }
+        ) {
+            LoginScreen2(navController = navController)
+        }
+
+
+        // Login Screen step 3
+        composable<Screens.LoginScreen3>(
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME),
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
+                )
+            }
+        ) {
+            LoginScreen3(navController = navController)
+        }
+
+        // Dash Board
         composable<Screens.DashBoard> {
             DashBoard()
         }
