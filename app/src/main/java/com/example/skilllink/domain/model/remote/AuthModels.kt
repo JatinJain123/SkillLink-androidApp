@@ -6,6 +6,7 @@ data class AuthBody (
 )
 
 data class AuthResponse (
+    val success: Boolean,
     val message: String,
     val userId: String,
     val email: String

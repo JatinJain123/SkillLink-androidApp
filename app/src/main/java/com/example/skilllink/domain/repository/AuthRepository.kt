@@ -2,9 +2,9 @@ package com.example.skilllink.domain.repository
 
 import com.example.skilllink.domain.model.remote.AuthBody
 import com.example.skilllink.domain.model.remote.AuthResponse
-import retrofit2.Response
+import com.example.skilllink.utils.NetworkResult
 
 interface AuthRepository {
-    suspend fun signup(authBody: AuthBody): Response<AuthResponse>
-    suspend fun login(authBody: AuthBody): Response<AuthResponse>
+    suspend fun signup(authBody: AuthBody): NetworkResult<AuthResponse>
+    suspend fun login(authBody: AuthBody): NetworkResult<AuthResponse>
 }
