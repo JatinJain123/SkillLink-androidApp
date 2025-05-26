@@ -145,7 +145,7 @@ fun LoginScreen1(
                         Button(
                             onClick = { signup = true },
                             shape = RectangleShape,
-                            colors = ButtonDefaults.buttonColors(
+                            colors = ButtonDefaults.buttonColors (
                                 containerColor = if(signup) customFields.inverseBg else MaterialTheme.colorScheme.background,
                                 contentColor = if(signup) MaterialTheme.colorScheme.background else customFields.inverseBg,
                             )
@@ -241,14 +241,16 @@ fun SignUp(
             label = "Confirm Password",
             isPassword = true,
             leadingIcon = ImageVector.vectorResource(R.drawable.lock_icon),
-            customFields = customFields
+            customFields = customFields,
+            isError = password != confirmPassword
         )
 
         Spacer(modifier = Modifier.height(customFields.extraLargeSpacing))
 
         GradientButton(
             text = "SignUp",
-            customFields = customFields
+            customFields = customFields,
+            isLoading = false
         ) { }
     }
 }
@@ -291,7 +293,8 @@ fun Login(
 
         GradientButton(
             text = "Login",
-            customFields = customFields
+            customFields = customFields,
+            isLoading = false
         ) { }
     }
 }

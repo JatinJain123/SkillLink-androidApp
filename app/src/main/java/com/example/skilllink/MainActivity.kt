@@ -43,9 +43,13 @@ class MainActivity : ComponentActivity() {
             val applicationContext = LocalContext.current.applicationContext
             val appStoreViewModel = hiltViewModel<AppStoreViewModel>()
             val userId by appStoreViewModel.currentUser.collectAsState()
+            val email by appStoreViewModel.currentEmail.collectAsState()
 
             var userPrefsStoreViewModel: UserPrefsStoreViewModel? by remember { mutableStateOf(null) }
             var isDarkTheme by remember { mutableStateOf(true) }
+            var isLogged by remember { mutableStateOf(false) }
+            var hasUsername by remember { mutableStateOf(false) }
+            var hasSecretPin by remember { mutableStateOf(false) }
             var isUserSetupComplete by remember { mutableStateOf(false) }
 
             var minDelay by remember { mutableStateOf(false) }
@@ -65,6 +69,12 @@ class MainActivity : ComponentActivity() {
                     userPrefsStoreViewModel = ViewModelProvider(
                         this@MainActivity, userPrefsStoreViewModelFactory
                     )[UserPrefsStoreViewModel::class.java]
+
+                    userPrefsStoreViewModel?.let {
+                        it.setId(userId)
+                        it.setEmail(email)
+                    }
+                    isLogged = true
                 } else {
                     isInitialSetupComplete = true
                 }
@@ -77,7 +87,9 @@ class MainActivity : ComponentActivity() {
 
                 LaunchedEffect(username, hasSpin, lightMode) {
                     isDarkTheme = !lightMode
-                    isUserSetupComplete = username.isNotEmpty() && hasSpin
+                    hasUsername = username.isNotEmpty()
+                    hasSecretPin = hasSpin
+                    isUserSetupComplete = hasUsername && hasSecretPin
                     isInitialSetupComplete = true
                 }
             }
@@ -88,6 +100,9 @@ class MainActivity : ComponentActivity() {
                     userPrefsStoreViewModel = userPrefsStoreViewModel
                 )
                 val uiStates = UiStates(
+                    isLogged = isLogged,
+                    hasUsername = hasUsername,
+                    hasSecretPin = hasSecretPin,
                     isUserSetupComplete = isUserSetupComplete,
                     isDarkTheme = isDarkTheme
                 )

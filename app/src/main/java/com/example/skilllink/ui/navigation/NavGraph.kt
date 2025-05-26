@@ -17,13 +17,19 @@ import com.example.skilllink.utils.AppConstants
 fun NavGraph() {
     val navController = rememberNavController()
     val uiStates = LocalUiStates.current
+    val isLogged = uiStates.isLogged
+    val hasUsername = uiStates.hasUsername
     val isUserSetupComplete = uiStates.isUserSetupComplete
 
     NavHost(
         navController = navController,
-        startDestination = if(isUserSetupComplete) Screens.DashBoard else Screens.LoginScreen1
+        startDestination = when {
+            isUserSetupComplete -> Screens.DashBoard
+            isLogged && hasUsername -> Screens.LoginScreen3
+            isLogged -> Screens.LoginScreen2
+            else -> Screens.LoginScreen1
+        }
     ) {
-
         // Login screen step 1
         composable<Screens.LoginScreen1>(
             enterTransition = {

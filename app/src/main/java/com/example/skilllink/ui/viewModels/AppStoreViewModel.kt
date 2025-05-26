@@ -20,10 +20,10 @@ class AppStoreViewModel @Inject constructor(
         initialValue = ""
     )
 
-    val notificationsEnabled: StateFlow<Boolean> = appStoreManager.notificationsEnabled.stateIn(
+    val currentEmail: StateFlow<String> = appStoreManager.currentEmail.stateIn(
         scope = viewModelScope,
         SharingStarted.WhileSubscribed(5000),
-        initialValue = false
+        initialValue = ""
     )
 
     fun setCurrentUser(userId: String) {
@@ -32,9 +32,9 @@ class AppStoreViewModel @Inject constructor(
         }
     }
 
-    fun setNotificationsEnabled(enabled: Boolean) {
+    fun setCurrentEmail(email: String) {
         viewModelScope.launch {
-            appStoreManager.setNotifications(enabled = enabled)
+            appStoreManager.setCurrentEmail(email = email)
         }
     }
 }

@@ -26,7 +26,8 @@ fun StyledInputField(
     label: String,
     isPassword: Boolean = false,
     leadingIcon: ImageVector,
-    customFields: CustomFields
+    customFields: CustomFields,
+    isError: Boolean = false
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
 
@@ -52,6 +53,7 @@ fun StyledInputField(
                 }
             }
         },
+        isError = isError,
         visualTransformation = if (isPassword && !passwordVisible) PasswordVisualTransformation() else VisualTransformation.None,
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = customFields.primaryFocusedColor,

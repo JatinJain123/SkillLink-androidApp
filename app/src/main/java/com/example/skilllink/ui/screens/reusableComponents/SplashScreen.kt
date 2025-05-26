@@ -114,7 +114,7 @@ fun Logo(visible: Boolean) {
             .offset(y = logoOffset)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.skilllink_logo_transparent_bg),
+            painter = painterResource(id = R.drawable.skill_link_logo_transparent_bg),
             contentDescription = "App Logo",
             modifier = Modifier.size(320.dp)
         )

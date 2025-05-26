@@ -12,20 +12,20 @@ class AppStoreManager @Inject constructor(
 ) {
     suspend fun setCurrentUser(userId: String) {
         val hashedString = hashUserId(userId = userId)
-        appStore.updateData { it ->
+        appStore.updateData {
             it.toBuilder().setCurrentUserId(hashedString).build()
         }
     }
 
-    suspend fun setNotifications(enabled: Boolean) {
-        appStore.updateData { it ->
-            it.toBuilder().setNotificationsEnabled(enabled).build()
+    suspend fun setCurrentEmail(email: String) {
+        appStore.updateData {
+            it.toBuilder().setCurrentEmail(email).build()
         }
     }
 
     val currentUser: Flow<String> = appStore.data
         .map { it.currentUserId }
 
-    val notificationsEnabled: Flow<Boolean> = appStore.data
-        .map { it.notificationsEnabled }
+    val currentEmail: Flow<String> = appStore.data
+        .map { it.currentEmail }
 }

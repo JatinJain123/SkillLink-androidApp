@@ -5,5 +5,5 @@ option java_multiple_files = true;
 
 message AppUser {
   string current_user_id = 1;
-  bool notifications_enabled = 2;
+  string current_email = 2;
 }
