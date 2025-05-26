@@ -32,15 +32,15 @@ fun NavGraph() {
     ) {
         // Login screen step 1
         composable<Screens.LoginScreen1>(
-            enterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME),
-                )
-            },
             exitTransition = {
                 slideOutOfContainer(
                     AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
                     animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
                 )
             }
@@ -52,13 +52,25 @@ fun NavGraph() {
         composable<Screens.LoginScreen2>(
             enterTransition = {
                 slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    AnimatedContentTransitionScope.SlideDirection.Left,
                     animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME),
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
                     AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
                     animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
                 )
             }
@@ -71,13 +83,25 @@ fun NavGraph() {
         composable<Screens.LoginScreen3>(
             enterTransition = {
                 slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    AnimatedContentTransitionScope.SlideDirection.Left,
                     animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME),
                 )
             },
             exitTransition = {
                 slideOutOfContainer(
                     AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
                     animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
                 )
             }

@@ -41,6 +41,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.skilllink.R
+import com.example.skilllink.ui.navigation.Screens
 import com.example.skilllink.ui.screens.reusableComponents.Dots
 import com.example.skilllink.ui.screens.reusableComponents.GradientButton
 import com.example.skilllink.ui.screens.reusableComponents.StyledInputField
@@ -172,9 +173,9 @@ fun LoginScreen1(
                     }
 
                     if(signup) {
-                        SignUp(customFields)
+                        SignUp(customFields, navController)
                     } else {
-                        Login(customFields)
+                        Login(customFields, navController)
                     }
                 }
 
@@ -200,7 +201,8 @@ fun LoginScreen1(
 
 @Composable
 fun SignUp(
-    customFields: CustomFields
+    customFields: CustomFields,
+    navController: NavController
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -257,7 +259,8 @@ fun SignUp(
 
 @Composable
 fun Login(
-    customFields: CustomFields
+    customFields: CustomFields,
+    navController: NavController
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -295,6 +298,8 @@ fun Login(
             text = "Login",
             customFields = customFields,
             isLoading = false
-        ) { }
+        ) {
+            navController.navigate(Screens.LoginScreen2)
+        }
     }
 }
