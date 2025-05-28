@@ -43,8 +43,8 @@ import androidx.navigation.NavController
 import com.example.skilllink.R
 import com.example.skilllink.ui.navigation.Screens
 import com.example.skilllink.ui.screens.reusableComponents.Dots
-import com.example.skilllink.ui.screens.reusableComponents.GradientButton
-import com.example.skilllink.ui.screens.reusableComponents.StyledInputField
+import com.example.skilllink.ui.screens.reusableComponents.buttons.GradientButton
+import com.example.skilllink.ui.screens.reusableComponents.inputFields.StyledInputField
 import com.example.skilllink.ui.theme.CustomFields
 import com.example.skilllink.ui.theme.LocalCustomColors
 
@@ -253,7 +253,9 @@ fun SignUp(
             text = "SignUp",
             customFields = customFields,
             isLoading = false
-        ) { }
+        ) {
+            navController.navigate(Screens.LoginScreen2)
+        }
     }
 }
 

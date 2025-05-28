@@ -38,8 +38,8 @@ import androidx.navigation.NavController
 import com.example.skilllink.R
 import com.example.skilllink.ui.navigation.Screens
 import com.example.skilllink.ui.screens.reusableComponents.Dots
-import com.example.skilllink.ui.screens.reusableComponents.GradientButton
-import com.example.skilllink.ui.screens.reusableComponents.StyledInputField
+import com.example.skilllink.ui.screens.reusableComponents.buttons.GradientButton
+import com.example.skilllink.ui.screens.reusableComponents.inputFields.StyledInputField
 import com.example.skilllink.ui.theme.LocalCustomColors
 
 @Composable
@@ -159,9 +159,9 @@ fun LoginScreen2(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            Dots(color = customFields.primaryFocusedColor, size = 8.dp)
+            Dots(color = customFields.primaryUnfocusedColor, size = 8.dp)
             Spacer(modifier = Modifier.width(customFields.smallSpacing))
-            Dots(color = customFields.primaryUnfocusedColor, size = 16.dp)
+            Dots(color = customFields.primaryFocusedColor, size = 16.dp)
             Spacer(modifier = Modifier.width(customFields.smallSpacing))
             Dots(color = customFields.primaryUnfocusedColor, size = 8.dp)
         }

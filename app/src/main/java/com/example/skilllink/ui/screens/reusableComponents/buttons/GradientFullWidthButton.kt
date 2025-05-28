@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.screens.reusableComponents
+package com.example.skilllink.ui.screens.reusableComponents.buttons
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -54,7 +54,10 @@ fun GradientButton(
                 color = customFields.primaryTextColor,
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier
-                    .padding(vertical = customFields.midPadding)
+                    .padding(
+                        top = customFields.midPadding,
+                        bottom = customFields.midPadding
+                    )
             )
         }
     }

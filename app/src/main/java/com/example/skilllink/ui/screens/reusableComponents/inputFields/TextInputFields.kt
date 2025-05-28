@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.screens.reusableComponents
+package com.example.skilllink.ui.screens.reusableComponents.inputFields
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Icon
