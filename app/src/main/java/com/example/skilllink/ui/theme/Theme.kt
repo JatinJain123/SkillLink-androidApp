@@ -42,7 +42,7 @@ data class CustomFields(
     val extraLargeSpacing: Dp = 32.dp
 )
 
-private val darkCustomColor = CustomFields(
+private val darkCustomFields = CustomFields(
     primaryTextColor = VeryLightGray,
     secondaryTextColor = Color.LightGray,
     inverseBg = Color.White,
@@ -51,7 +51,7 @@ private val darkCustomColor = CustomFields(
     primaryUnfocusedColor = Color.LightGray
 )
 
-private val lightCustomColor = CustomFields(
+private val lightCustomFields = CustomFields(
     primaryTextColor = Color.Black,
     secondaryTextColor = Color.DarkGray,
     inverseBg = Color.Black,
@@ -80,9 +80,9 @@ fun SkillLinkTheme(
         else -> LightColorScheme
     }
 
-    val customColor = if(darkTheme) darkCustomColor else lightCustomColor
+    val customFields = if(darkTheme) darkCustomFields else lightCustomFields
 
-    CompositionLocalProvider(LocalCustomColors provides customColor) {
+    CompositionLocalProvider(LocalCustomColors provides customFields) {
         MaterialTheme(
             colorScheme = colorScheme,
             typography = Typography,

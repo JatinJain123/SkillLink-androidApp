@@ -8,12 +8,12 @@ import androidx.compose.ui.unit.sp
 
 val Typography = Typography(
     // Used for primary body text — e.g., paragraphs
-    bodyLarge = TextStyle(
+    bodyMedium = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
+        letterSpacing = 0.25.sp
     ),
 
     // Main screen headers (e.g., "Sign In / Login")
@@ -26,12 +26,12 @@ val Typography = Typography(
     ),
 
     // Subtitles or italic descriptions
-    bodyMedium = TextStyle(
+    bodyLarge = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 18.sp,
         lineHeight = 26.sp,
-        letterSpacing = 0.25.sp
+        letterSpacing = 0.5.sp
     ),
 
     // Section titles or minor headers

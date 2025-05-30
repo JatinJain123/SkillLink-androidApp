@@ -54,6 +54,12 @@ class UserPrefsStoreViewModel(
         }
     }
 
+    fun setProfilePic(uri: String) {
+        viewModelScope.launch {
+            userPrefsStoreManager.setProfilePic(uri)
+        }
+    }
+
     val id: StateFlow<String> = userPrefsStoreManager.id.stateIn(
         scope = viewModelScope,
         SharingStarted.WhileSubscribed(5000),
@@ -82,5 +88,11 @@ class UserPrefsStoreViewModel(
         scope = viewModelScope,
         SharingStarted.WhileSubscribed(5000),
         initialValue = false
+    )
+
+    val profilePic: StateFlow<String> = userPrefsStoreManager.profilePic.stateIn(
+        scope = viewModelScope,
+        SharingStarted.WhileSubscribed(5000),
+        initialValue = ""
     )
 }

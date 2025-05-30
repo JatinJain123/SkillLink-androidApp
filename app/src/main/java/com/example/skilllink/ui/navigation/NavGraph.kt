@@ -7,10 +7,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.skilllink.domain.model.local.LocalUiStates
-import com.example.skilllink.ui.screens.userScreens.DashBoard
-import com.example.skilllink.ui.screens.authScreens.LoginScreen1
-import com.example.skilllink.ui.screens.authScreens.LoginScreen2
-import com.example.skilllink.ui.screens.authScreens.LoginScreen3
+import com.example.skilllink.ui.screens.authScreens.LoginScreen
+import com.example.skilllink.ui.screens.authScreens.SecretPinScreen
+import com.example.skilllink.ui.screens.authScreens.UserNameScreen
+import com.example.skilllink.ui.screens.learnerScreens.homeScreen.HomeScreen
 import com.example.skilllink.utils.AppConstants
 
 @Composable
@@ -24,94 +24,38 @@ fun NavGraph() {
     NavHost(
         navController = navController,
         startDestination = when {
-            isUserSetupComplete -> Screens.DashBoard
-            isLogged && hasUsername -> Screens.LoginScreen3
-            isLogged -> Screens.LoginScreen2
-            else -> Screens.LoginScreen1
+            isUserSetupComplete -> Screens.HomeScreens.HomeScreen
+            isLogged && hasUsername -> Screens.AuthScreens.SecretPinScreen
+            isLogged -> Screens.AuthScreens.UserNameScreen
+            else -> Screens.AuthScreens.LoginScreen
         }
     ) {
         // Login screen step 1
-        composable<Screens.LoginScreen1>(
-            exitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
-                )
-            },
-            popEnterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
-                )
-            }
-        ) {
-            LoginScreen1(navController = navController)
+        composable<Screens.AuthScreens.LoginScreen> {
+            LoginScreen(navController = navController)
         }
 
         // Login screen step 2
-        composable<Screens.LoginScreen2>(
-            enterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME),
-                )
-            },
-            exitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
-                )
-            },
-            popEnterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
-                )
-            },
-            popExitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
-                )
-            }
-        ) {
-            LoginScreen2(navController = navController)
+        composable<Screens.AuthScreens.UserNameScreen> {
+            UserNameScreen(navController = navController)
         }
-
 
         // Login Screen step 3
-        composable<Screens.LoginScreen3>(
-            enterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME),
-                )
-            },
+        composable<Screens.AuthScreens.SecretPinScreen>(
             exitTransition = {
                 slideOutOfContainer(
                     AnimatedContentTransitionScope.SlideDirection.Left,
                     animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
                 )
             },
-            popEnterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
-                )
-            },
-            popExitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(AppConstants.SCREEN_TRANSITION_TIME)
-                )
-            }
+            popExitTransition = { null }
         ) {
-            LoginScreen3(navController = navController)
+            SecretPinScreen(navController = navController)
         }
 
-        // Dash Board
-        composable<Screens.DashBoard> {
-            DashBoard()
+        // Home Screen
+        composable<Screens.HomeScreens.HomeScreen> {
+            HomeScreen(navController = navController)
         }
     }
 }

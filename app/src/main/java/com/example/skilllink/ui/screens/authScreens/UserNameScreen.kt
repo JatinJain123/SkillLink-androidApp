@@ -43,7 +43,7 @@ import com.example.skilllink.ui.screens.reusableComponents.inputFields.StyledInp
 import com.example.skilllink.ui.theme.LocalCustomColors
 
 @Composable
-fun LoginScreen2(
+fun UserNameScreen(
     navController: NavController
 ) {
     val customFields = LocalCustomColors.current
@@ -145,7 +145,7 @@ fun LoginScreen2(
                     customFields = customFields,
                     isLoading = false
                 ) {
-                    navController.navigate(Screens.LoginScreen3)
+                    navController.navigate(Screens.AuthScreens.SecretPinScreen)
                 }
             }
         }

@@ -1,6 +1,5 @@
 package com.example.skilllink.ui.screens.authScreens
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -30,7 +29,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
@@ -43,12 +41,11 @@ import com.example.skilllink.ui.screens.reusableComponents.inputFields.OtpInputF
 import com.example.skilllink.ui.theme.LocalCustomColors
 
 @Composable
-fun LoginScreen3(
+fun SecretPinScreen(
     navController: NavController
 ) {
-    val context = LocalContext.current
     val customFields = LocalCustomColors.current
-    var username by remember { mutableStateOf("") }
+    var spin by remember { mutableStateOf("") }
 
     Box(
         modifier = Modifier
@@ -132,9 +129,7 @@ fun LoginScreen3(
             ) {
                 OtpInputField(
                     customFields = customFields
-                ) { otp ->
-                    Toast.makeText(context, "the otp is $otp", Toast.LENGTH_SHORT).show()
-                }
+                ) { otp -> spin = otp }
 
                 Spacer(modifier = Modifier.height(customFields.extraLargeSpacing))
 
@@ -143,7 +138,11 @@ fun LoginScreen3(
                     customFields = customFields,
                     isLoading = false
                 ) {
-                    navController.navigate(Screens.DashBoard)
+                    navController.navigate(Screens.HomeScreens.HomeScreen) {
+                        popUpTo(route = Screens.AuthScreens.LoginScreen) {
+                            inclusive = true
+                        }
+                    }
                 }
             }
         }

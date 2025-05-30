@@ -3,15 +3,20 @@ package com.example.skilllink.ui.navigation
 import kotlinx.serialization.Serializable
 
 sealed class Screens {
-    @Serializable
-    data object LoginScreen1
+    sealed class AuthScreens{
+        @Serializable
+        data object LoginScreen
 
-    @Serializable
-    data object LoginScreen2
+        @Serializable
+        data object UserNameScreen
 
-    @Serializable
-    data object LoginScreen3
+        @Serializable
+        data object SecretPinScreen
+    }
 
-    @Serializable
-    data object DashBoard
+
+    sealed class HomeScreens {
+        @Serializable
+        data object HomeScreen
+    }
 }

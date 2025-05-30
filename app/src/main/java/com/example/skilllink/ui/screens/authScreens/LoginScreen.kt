@@ -49,7 +49,7 @@ import com.example.skilllink.ui.theme.CustomFields
 import com.example.skilllink.ui.theme.LocalCustomColors
 
 @Composable
-fun LoginScreen1(
+fun LoginScreen(
     navController: NavController
 ) {
     val customFields = LocalCustomColors.current
@@ -254,7 +254,7 @@ fun SignUp(
             customFields = customFields,
             isLoading = false
         ) {
-            navController.navigate(Screens.LoginScreen2)
+            navController.navigate(Screens.AuthScreens.UserNameScreen)
         }
     }
 }
@@ -301,7 +301,7 @@ fun Login(
             customFields = customFields,
             isLoading = false
         ) {
-            navController.navigate(Screens.LoginScreen2)
+            navController.navigate(Screens.AuthScreens.UserNameScreen)
         }
     }
 }
