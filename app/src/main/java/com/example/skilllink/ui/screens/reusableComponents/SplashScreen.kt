@@ -32,6 +32,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.skilllink.R
+import com.example.skilllink.ui.theme.SkillLinkTheme
 import com.example.skilllink.ui.theme.VeryLightGray
 import kotlinx.coroutines.delay
 
@@ -175,12 +176,8 @@ fun Tagline(visible: Boolean) {
 @Composable
 fun ShowLoading(visible: Boolean) {
     if(visible) {
-        Text(
-            text = "Loading ...",
-            fontSize = 32.sp,
-            fontFamily = FontFamily(Font(R.font.caveat_brush_font)),
-            fontStyle = FontStyle.Italic,
-            color = Color.LightGray
-        )
+        SkillLinkTheme(darkTheme = true) {
+            CustomCircularProgressIndicator()
+        }
     }
 }
