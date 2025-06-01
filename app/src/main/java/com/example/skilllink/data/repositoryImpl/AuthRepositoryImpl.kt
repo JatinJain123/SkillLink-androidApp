@@ -1,8 +1,8 @@
 package com.example.skilllink.data.repositoryImpl
 
 import com.example.skilllink.data.remote.AuthApi
-import com.example.skilllink.domain.model.remote.AuthBody
 import com.example.skilllink.domain.model.remote.AuthResponse
+import com.example.skilllink.domain.model.remote.LoginRequest
 import com.example.skilllink.domain.repository.AuthRepository
 import com.example.skilllink.utils.NetworkResult
 import com.google.gson.Gson
@@ -12,13 +12,13 @@ import javax.inject.Inject
 class AuthRepositoryImpl @Inject constructor(
     private val authApi: AuthApi
 ): AuthRepository {
-    override suspend fun signup(authBody: AuthBody): NetworkResult<AuthResponse> {
-        val response = authApi.signup(authBody = authBody)
+    override suspend fun signup(request: LoginRequest): NetworkResult<AuthResponse> {
+        val response = authApi.signup(request = request)
         return checkResponse(response = response)
     }
 
-    override suspend fun login(authBody: AuthBody): NetworkResult<AuthResponse> {
-        val response = authApi.login(authBody = authBody)
+    override suspend fun login(request: LoginRequest): NetworkResult<AuthResponse> {
+        val response = authApi.login(request = request)
         return checkResponse(response = response)
     }
 

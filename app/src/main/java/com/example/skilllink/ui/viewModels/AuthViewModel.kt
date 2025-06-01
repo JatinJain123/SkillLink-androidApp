@@ -2,8 +2,8 @@ package com.example.skilllink.ui.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.skilllink.domain.model.remote.AuthBody
 import com.example.skilllink.domain.model.remote.AuthResponse
+import com.example.skilllink.domain.model.remote.LoginRequest
 import com.example.skilllink.domain.repository.AuthRepository
 import com.example.skilllink.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -47,9 +47,9 @@ class AuthViewModel @Inject constructor(
                 return@launch
             }
 
-            val authBody = AuthBody(email = email, password = password)
+            val request = LoginRequest(email = email, password = password)
             _authResponse.value = NetworkResult.Loading()
-            val result =  authRepository.signup(authBody = authBody)
+            val result =  authRepository.signup(request = request)
             _authResponse.value = result
             handleAuthResult(result = result, appStoreViewModel = appStoreViewModel)
         }
@@ -66,9 +66,9 @@ class AuthViewModel @Inject constructor(
                 return@launch
             }
 
-            val authBody = AuthBody(email = email, password = password)
+            val request = LoginRequest(email = email, password = password)
             _authResponse.value = NetworkResult.Loading()
-            val result =  authRepository.login(authBody = authBody)
+            val result =  authRepository.login(request = request)
             _authResponse.value = result
             handleAuthResult(result = result, appStoreViewModel = appStoreViewModel)
         }

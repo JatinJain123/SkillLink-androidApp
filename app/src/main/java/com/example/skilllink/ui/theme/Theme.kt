@@ -32,10 +32,16 @@ data class CustomFields(
     val iconTint: Color,
     val primaryFocusedColor: Color,
     val primaryUnfocusedColor: Color,
+
+    /* padding values */
+    val extraSmallPadding: Dp = 4.dp,
     val smallPadding: Dp = 8.dp,
     val midPadding: Dp = 12.dp,
     val largePadding: Dp = 16.dp,
     val extraLargePadding: Dp = 32.dp,
+
+    /* spacing/margin values */
+    val extraSmallSpacing: Dp = 4.dp,
     val smallSpacing: Dp = 8.dp,
     val midSpacing: Dp = 12.dp,
     val largeSpacing: Dp = 16.dp,

@@ -55,7 +55,7 @@ val bottomNavItemList = listOf(
         title = "Profile",
         selectedIcon = Icons.Filled.AccountCircle,
         unselectedIcon = Icons.Outlined.AccountCircle,
-        hasNews = true,
+        hasNews = false,
         navigation = {}
     )
 )

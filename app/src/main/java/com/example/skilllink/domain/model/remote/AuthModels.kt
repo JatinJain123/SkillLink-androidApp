@@ -1,6 +1,6 @@
 package com.example.skilllink.domain.model.remote
 
-data class AuthBody (
+data class LoginRequest (
     val email: String,
     val password: String
 )

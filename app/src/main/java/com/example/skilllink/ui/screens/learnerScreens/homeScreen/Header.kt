@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
@@ -48,8 +49,7 @@ fun Header(
             .padding(
                 top = customFields.largePadding,
                 start = customFields.midPadding,
-                end = customFields.midPadding,
-                bottom = customFields.midPadding
+                end = customFields.midPadding
             ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -72,6 +72,7 @@ fun Header(
                         model = Uri.parse(profilePic),
                         contentDescription = "profile Picture",
                         modifier = Modifier
+                            .clip(CircleShape)
                             .fillMaxSize()
                     )
                 } else {

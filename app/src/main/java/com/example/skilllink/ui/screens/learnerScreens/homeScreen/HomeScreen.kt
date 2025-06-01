@@ -83,6 +83,11 @@ fun ScreenView(
             navController = navController
         )
 
+        FollowersScroll(
+            customFields = customFields,
+            navController = navController
+        )
+
         Column(
             modifier = Modifier
                 .weight(1f)
@@ -124,4 +129,3 @@ private val darkCustomFields = CustomFields(
     primaryFocusedColor = Color.White,
     primaryUnfocusedColor = Color.LightGray
 )
-
