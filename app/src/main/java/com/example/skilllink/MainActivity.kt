@@ -24,7 +24,7 @@ import com.example.skilllink.domain.model.local.LocalAppDependencies
 import com.example.skilllink.domain.model.local.LocalUiStates
 import com.example.skilllink.domain.model.local.UiStates
 import com.example.skilllink.ui.navigation.NavGraph
-import com.example.skilllink.ui.screens.reusableComponents.SplashScreen
+import com.example.skilllink.ui.reusableComponents.SplashScreen
 import com.example.skilllink.ui.theme.SkillLinkTheme
 import com.example.skilllink.ui.viewModels.AppStoreViewModel
 import com.example.skilllink.ui.viewModels.UserPrefsStoreViewModel

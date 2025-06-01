@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.screens.reusableComponents.buttons
+package com.example.skilllink.ui.reusableComponents.buttons
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

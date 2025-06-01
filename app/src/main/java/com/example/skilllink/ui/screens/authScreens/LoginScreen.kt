@@ -42,9 +42,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.skilllink.R
 import com.example.skilllink.ui.navigation.Screens
-import com.example.skilllink.ui.screens.reusableComponents.Dots
-import com.example.skilllink.ui.screens.reusableComponents.buttons.GradientButton
-import com.example.skilllink.ui.screens.reusableComponents.inputFields.StyledInputField
+import com.example.skilllink.ui.reusableComponents.Dots
+import com.example.skilllink.ui.reusableComponents.buttons.GradientButton
+import com.example.skilllink.ui.reusableComponents.inputFields.StyledInputField
 import com.example.skilllink.ui.theme.CustomFields
 import com.example.skilllink.ui.theme.LocalCustomColors
 

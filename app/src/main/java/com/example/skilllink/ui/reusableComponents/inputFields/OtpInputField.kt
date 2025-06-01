@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.screens.reusableComponents.inputFields
+package com.example.skilllink.ui.reusableComponents.inputFields
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat

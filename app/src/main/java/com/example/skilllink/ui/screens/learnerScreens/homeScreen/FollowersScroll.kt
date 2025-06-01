@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.skilllink.ui.screens.reusableComponents.cards.CircularReelsCard
+import com.example.skilllink.ui.reusableComponents.cards.CircularReelsCard
 import com.example.skilllink.ui.theme.CustomFields
 import com.example.skilllink.utils.testReelData
 

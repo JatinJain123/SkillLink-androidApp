@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.screens.reusableComponents.cards
+package com.example.skilllink.ui.reusableComponents.cards
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
