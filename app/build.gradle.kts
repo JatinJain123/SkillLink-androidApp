@@ -68,6 +68,11 @@ android {
 }
 
 dependencies {
+    // exo-player dependencies
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.media3.ui)
+
     // for theme purpose
     implementation(libs.androidx.appcompat)
 

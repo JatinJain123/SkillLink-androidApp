@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
@@ -35,8 +34,7 @@ fun CircularReelsCard(
 ) {
     Column(
         modifier = Modifier
-            .wrapContentSize()
-            .padding(vertical = customFields.smallPadding),
+            .wrapContentSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -62,7 +60,7 @@ fun CircularReelsCard(
         Spacer(modifier = Modifier.height(customFields.smallSpacing))
 
         Text(
-            text = "test Name",
+            text = "Name",
             color = customFields.primaryTextColor,
             style = MaterialTheme.typography.bodyLarge
         )

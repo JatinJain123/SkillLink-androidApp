@@ -11,8 +11,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
@@ -46,10 +46,12 @@ fun Header(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
+            .statusBarsPadding()
             .padding(
-                top = customFields.largePadding,
+                top = customFields.smallPadding,
                 start = customFields.midPadding,
-                end = customFields.midPadding
+                end = customFields.midPadding,
+                bottom = customFields.largePadding
             ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -59,7 +61,7 @@ fun Header(
         ) {
             Box(
                 modifier = Modifier
-                    .weight(0.20f)
+                    .weight(0.12f)
                     .aspectRatio(1f)
                     .border(
                         width = 2.dp,
@@ -100,8 +102,6 @@ fun Header(
                     color = customFields.primaryTextColor
                 )
 
-                Spacer(modifier = Modifier.height(customFields.smallSpacing))
-
                 Text(
                     text = "learn. grow. create",
                     style = MaterialTheme.typography.bodyMedium,
@@ -113,7 +113,7 @@ fun Header(
 
         Row(
             modifier = Modifier
-                .weight(0.25f)
+                .weight(0.20f)
                 .wrapContentHeight()
                 .align(Alignment.CenterVertically),
             horizontalArrangement = Arrangement.SpaceEvenly

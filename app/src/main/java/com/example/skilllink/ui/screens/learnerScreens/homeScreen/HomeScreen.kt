@@ -1,10 +1,8 @@
 package com.example.skilllink.ui.screens.learnerScreens.homeScreen
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -66,6 +64,15 @@ fun ScreenView(
     var selectedItemIndex by rememberSaveable { mutableIntStateOf(0) }
 
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
+        topBar = {
+            Header(
+                userName = userName,
+                profilePic = profilePic,
+                customFields = customFields,
+                navController = navController
+            )
+        },
         bottomBar = {
             BottomNavigationBar(
                 customFields = customFields,
@@ -75,30 +82,24 @@ fun ScreenView(
             )
         }
     ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(innerPadding),
+        LazyColumn (
+            modifier = Modifier.padding(innerPadding),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Header(
-                userName = userName,
-                profilePic = profilePic,
-                customFields = customFields,
-                navController = navController
-            )
+            item {
+                FollowersScroll(
+                    customFields = customFields,
+                    navController = navController
+                )
+            }
 
-            FollowersScroll(
-                customFields = customFields,
-                navController = navController
-            )
-
-            TrendingScroll(
-                customFields = customFields,
-                navController = navController
-            )
+            item {
+                TrendingScroll(
+                    customFields = customFields,
+                    navController = navController
+                )
+            }
         }
     }
 }
