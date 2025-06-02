@@ -78,7 +78,7 @@ fun FollowersScroll(
                 items(testReelsList) { reel ->
                     CircularReelsCard(
                         reel = reel,
-                        size = 80.dp,
+                        size = 90.dp,
                         customFields = customFields,
                         navigate = { }
                     )
