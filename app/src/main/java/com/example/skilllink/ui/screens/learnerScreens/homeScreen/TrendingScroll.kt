@@ -10,27 +10,20 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.navigation.NavController
 import com.example.skilllink.ui.theme.CustomFields
-import com.example.skilllink.utils.testReelData
 
 @Composable
 fun TrendingScroll(
-    customFields: CustomFields,
-    navController: NavController
+    customFields: CustomFields
 ) {
-    val testReelsList = testReelData.reels
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(
-                top = customFields.largePadding,
+                top = customFields.extraLargePadding,
                 start = customFields.midPadding,
                 end = customFields.midPadding
             ),
@@ -51,28 +44,5 @@ fun TrendingScroll(
             color = customFields.secondaryTextColor,
             fontWeight = FontWeight.Normal
         )
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(top = customFields.midPadding),
-            verticalArrangement = Arrangement.spacedBy(customFields.midSpacing),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            if(testReelsList.isEmpty()) {
-                Text(
-                    text = "No Updates Yet !",
-                    color = customFields.secondaryTextColor,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Normal,
-                    textAlign = TextAlign.Center
-                )
-            } else {
-                testReelsList.forEachIndexed { _, reel ->
-
-                }
-            }
-        }
     }
 }

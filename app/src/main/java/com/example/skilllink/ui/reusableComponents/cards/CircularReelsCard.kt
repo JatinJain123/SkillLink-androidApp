@@ -18,12 +18,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.skilllink.domain.model.remote.Reel
 import com.example.skilllink.ui.theme.CustomFields
 import com.example.skilllink.ui.theme.LightNavyBlue
+import com.example.skilllink.ui.theme.NavyBlue
 
 @Composable
 fun CircularReelsCard(
@@ -43,12 +46,16 @@ fun CircularReelsCard(
                 .size(size)
                 .border(
                     width = 4.dp,
-                    color = LightNavyBlue,
-                    shape = CircleShape
+                    brush = Brush.linearGradient(
+                        colors = listOf(NavyBlue, LightNavyBlue),
+                        start = Offset(0f, 0f),
+                        end = Offset(70f, 70f)
+                    ),
+                    shape = CircleShape,
                 )
         ) {
             Image(
-                painter = rememberAsyncImagePainter(reel.thumbnailUrl),
+                painter = rememberAsyncImagePainter(reel.authorProfileImageUrl),
                 contentDescription = null,
                 modifier = Modifier
                     .clip(CircleShape)
@@ -60,7 +67,7 @@ fun CircularReelsCard(
         Spacer(modifier = Modifier.height(customFields.smallSpacing))
 
         Text(
-            text = "Name",
+            text = reel.authorName,
             color = customFields.primaryTextColor,
             style = MaterialTheme.typography.bodyLarge
         )

@@ -70,8 +70,11 @@ android {
 dependencies {
     // exo-player dependencies
     implementation(libs.androidx.media3.exoplayer)
-    implementation(libs.androidx.espresso.core)
     implementation(libs.androidx.media3.ui)
+
+    // for vertical pager
+    implementation(libs.google.accompanist.pager)
+    implementation(libs.accompanist.pager.indicators)
 
     // for theme purpose
     implementation(libs.androidx.appcompat)

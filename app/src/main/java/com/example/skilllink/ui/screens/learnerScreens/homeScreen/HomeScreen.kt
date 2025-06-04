@@ -3,12 +3,15 @@ package com.example.skilllink.ui.screens.learnerScreens.homeScreen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -17,16 +20,16 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.skilllink.domain.model.local.LocalAppDependencies
-import com.example.skilllink.ui.theme.CustomFields
+import com.example.skilllink.domain.model.remote.Reel
+import com.example.skilllink.ui.reusableComponents.cards.FeedReelCard
+import com.example.skilllink.ui.screens.learnerScreens.commonComponents.bottomBar.BottomNavigationBar
+import com.example.skilllink.ui.screens.learnerScreens.commonComponents.exoPlayer.rememberExoPlayerPool
 import com.example.skilllink.ui.theme.LocalCustomColors
-import com.example.skilllink.ui.theme.SkillLinkTheme
-import com.example.skilllink.ui.theme.VeryLightGray
-
+import com.example.skilllink.utils.testReelData
 
 @Composable
 fun HomeScreen(
@@ -36,6 +39,8 @@ fun HomeScreen(
     val userPrefsStoreViewModel = appDependencies.userPrefsStoreViewModel
     var userName by remember { mutableStateOf("User") }
     var profilePic by remember { mutableStateOf("") }
+
+    val testReels = testReelData.reels
 
     userPrefsStoreViewModel?.let {
         val name by it.userName.collectAsState()
@@ -50,6 +55,7 @@ fun HomeScreen(
     ScreenView(
         userName = userName,
         profilePic = profilePic,
+        testReels = testReels,
         navController = navController
     )
 }
@@ -58,10 +64,35 @@ fun HomeScreen(
 fun ScreenView(
     userName: String,
     profilePic: String,
+    testReels: List<Reel>,
     navController: NavController
 ) {
     val customFields = LocalCustomColors.current
-    var selectedItemIndex by rememberSaveable { mutableIntStateOf(0) }
+    var selectedNavItemIndex by rememberSaveable { mutableIntStateOf(0) }
+
+    val exoPlayersPool = rememberExoPlayerPool(testReels)
+    val listState = rememberLazyListState()
+    val focusedIndex by remember {
+        derivedStateOf {
+            val layoutInfo = listState.layoutInfo
+            val visibleItems = layoutInfo.visibleItemsInfo
+            val viewportCenter = (layoutInfo.viewportEndOffset + layoutInfo.viewportStartOffset) / 2
+
+            val videoItems = visibleItems.filter { item ->
+                item.index >= 2 && item.index < (2 + testReels.size)
+            }
+
+            if (videoItems.isEmpty()) {
+                -1
+            } else {
+                val closestVideoItem = videoItems.minByOrNull { item ->
+                    val itemCenter = item.offset + item.size / 2
+                    kotlin.math.abs(itemCenter - viewportCenter)
+                }
+                closestVideoItem?.let { it.index - 2 } ?: -1
+            }
+        }
+    }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -77,12 +108,13 @@ fun ScreenView(
             BottomNavigationBar(
                 customFields = customFields,
                 navController = navController,
-                selectedItemIndex = selectedItemIndex,
-                onClick = { index -> selectedItemIndex = index }
+                selectedItemIndex = selectedNavItemIndex,
+                onClick = { index -> selectedNavItemIndex = index }
             )
         }
     ) { innerPadding ->
         LazyColumn (
+            state = listState,
             modifier = Modifier.padding(innerPadding),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -95,35 +127,31 @@ fun ScreenView(
             }
 
             item {
-                TrendingScroll(
-                    customFields = customFields,
-                    navController = navController
-                )
+                TrendingScroll(customFields = customFields)
+            }
+
+            if(testReels.isEmpty()) {
+                item {
+                    Text(
+                        text = "No Updates Yet !",
+                        color = customFields.secondaryTextColor,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Normal,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(top = customFields.midPadding)
+                    )
+                }
+            } else {
+                itemsIndexed(testReels) { index, reel ->
+                    val exoPlayer = exoPlayersPool.createAndGet(index)
+                    FeedReelCard(
+                        reel = reel,
+                        exoPlayer = exoPlayer,
+                        isPlaying = index == focusedIndex,
+                        customFields = customFields
+                    )
+                }
             }
         }
     }
 }
-
-
-@Preview(showBackground = true)
-@Composable
-fun ScreenViewPreview() {
-    SkillLinkTheme(darkTheme = true) {
-        CompositionLocalProvider(LocalCustomColors provides darkCustomFields) {
-            ScreenView(
-                userName = "jatin_jain",
-                profilePic = "",
-                navController = rememberNavController()
-            )
-        }
-    }
-}
-
-private val darkCustomFields = CustomFields(
-    primaryTextColor = VeryLightGray,
-    secondaryTextColor = Color.LightGray,
-    inverseBg = Color.White,
-    iconTint = Color.LightGray,
-    primaryFocusedColor = Color.White,
-    primaryUnfocusedColor = Color.LightGray
-)

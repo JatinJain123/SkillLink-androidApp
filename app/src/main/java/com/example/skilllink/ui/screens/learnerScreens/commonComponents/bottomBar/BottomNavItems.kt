@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.navigation
+package com.example.skilllink.ui.screens.learnerScreens.commonComponents.bottomBar
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle

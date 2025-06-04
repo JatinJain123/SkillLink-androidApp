@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.screens.learnerScreens.homeScreen
+package com.example.skilllink.ui.screens.learnerScreens.commonComponents.bottomBar
 
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
-import com.example.skilllink.ui.navigation.bottomNavItemList
 import com.example.skilllink.ui.theme.CustomFields
 
 
