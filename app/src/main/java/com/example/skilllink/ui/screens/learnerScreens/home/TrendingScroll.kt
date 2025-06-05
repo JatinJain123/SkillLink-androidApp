@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.screens.learnerScreens.homeScreen
+package com.example.skilllink.ui.screens.learnerScreens.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

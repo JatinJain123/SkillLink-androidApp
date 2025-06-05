@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.screens.learnerScreens.homeScreen
+package com.example.skilllink.ui.screens.learnerScreens.home
 
 import android.net.Uri
 import androidx.compose.foundation.border
@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.skilllink.R
+import com.example.skilllink.ui.navigation.Screens
 import com.example.skilllink.ui.theme.CustomFields
 import com.example.skilllink.ui.theme.LightNavyBlue
 
@@ -76,6 +77,7 @@ fun Header(
                         modifier = Modifier
                             .clip(CircleShape)
                             .fillMaxSize()
+                            .clickable {  }
                     )
                 } else {
                     Icon(
@@ -84,6 +86,7 @@ fun Header(
                         tint = customFields.iconTint,
                         modifier = Modifier
                             .fillMaxSize()
+                            .clickable {  }
                     )
                 }
             }
@@ -130,7 +133,7 @@ fun Header(
                     modifier = Modifier
                         .fillMaxSize()
                         .clickable {
-
+                            navController.navigate(Screens.ChatRoom.ChatRoomScreen)
                         }
                 )
             }
@@ -149,7 +152,7 @@ fun Header(
                     modifier = Modifier
                         .fillMaxSize()
                         .clickable {
-
+                            navController.navigate(Screens.Home.NotificationScreen)
                         }
                 )
             }

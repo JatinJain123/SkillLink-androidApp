@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.screens.learnerScreens.commonComponents.exoPlayer
+package com.example.skilllink.ui.screens.commonComponents.exoPlayer
 
 import android.content.Context
 import androidx.media3.common.Player

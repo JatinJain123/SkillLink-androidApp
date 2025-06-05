@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.screens.learnerScreens.homeScreen
+package com.example.skilllink.ui.screens.learnerScreens.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
@@ -24,10 +24,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import com.example.skilllink.domain.model.local.LocalAppDependencies
+import com.example.skilllink.domain.model.local.LocalUiStates
 import com.example.skilllink.domain.model.remote.Reel
 import com.example.skilllink.ui.reusableComponents.cards.FeedReelCard
-import com.example.skilllink.ui.screens.learnerScreens.commonComponents.bottomBar.BottomNavigationBar
-import com.example.skilllink.ui.screens.learnerScreens.commonComponents.exoPlayer.rememberExoPlayerPool
+import com.example.skilllink.ui.screens.commonComponents.bottomBar.BottomNavigationBar
+import com.example.skilllink.ui.screens.commonComponents.exoPlayer.rememberExoPlayerPool
 import com.example.skilllink.ui.theme.LocalCustomColors
 import com.example.skilllink.utils.testReelData
 
@@ -68,8 +69,10 @@ fun ScreenView(
     navController: NavController
 ) {
     val customFields = LocalCustomColors.current
+    val uiStates = LocalUiStates.current
+
     var selectedNavItemIndex by rememberSaveable { mutableIntStateOf(0) }
-    var mikeOn by rememberSaveable { mutableStateOf(false) }
+    var mikeOn by rememberSaveable { mutableStateOf(uiStates.mikeOn) }
 
     val exoPlayersPool = rememberExoPlayerPool(reels = testReels, mikeOn = mikeOn)
     val listState = rememberLazyListState()
@@ -150,7 +153,10 @@ fun ScreenView(
                         exoPlayer = exoPlayer,
                         isPlaying = index == focusedIndex,
                         mikeOn = mikeOn,
-                        onMikeClick = { mikeOn = !mikeOn },
+                        onMikeClick = {
+                            mikeOn = !mikeOn
+                            uiStates.mikeOn = mikeOn
+                        },
                         customFields = customFields
                     )
                 }

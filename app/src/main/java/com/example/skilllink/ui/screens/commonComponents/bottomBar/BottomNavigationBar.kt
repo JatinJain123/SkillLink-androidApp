@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.screens.learnerScreens.commonComponents.bottomBar
+package com.example.skilllink.ui.screens.commonComponents.bottomBar
 
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox

@@ -145,7 +145,7 @@ fun UserNameScreen(
                     customFields = customFields,
                     isLoading = false
                 ) {
-                    navController.navigate(Screens.AuthScreens.SecretPinScreen)
+                    navController.navigate(Screens.Auth.SecretPinScreen)
                 }
             }
         }

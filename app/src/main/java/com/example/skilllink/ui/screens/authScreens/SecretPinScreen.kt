@@ -138,8 +138,8 @@ fun SecretPinScreen(
                     customFields = customFields,
                     isLoading = false
                 ) {
-                    navController.navigate(Screens.HomeScreens.HomeScreen) {
-                        popUpTo(route = Screens.AuthScreens.LoginScreen) {
+                    navController.navigate(Screens.Home.HomeScreen) {
+                        popUpTo(route = Screens.Auth.LoginScreen) {
                             inclusive = true
                         }
                     }

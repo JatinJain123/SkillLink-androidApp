@@ -7,7 +7,8 @@ data class UiStates (
     val hasUsername: Boolean,
     val hasSecretPin: Boolean,
     val isUserSetupComplete: Boolean,
-    val isDarkTheme: Boolean
+    val isDarkTheme: Boolean,
+    var mikeOn: Boolean = false,
 )
 
 val LocalUiStates = staticCompositionLocalOf<UiStates> {

@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.screens.learnerScreens.commonComponents.bottomBar
+package com.example.skilllink.ui.screens.commonComponents.bottomBar
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -10,6 +10,7 @@ import androidx.compose.material.icons.outlined.Search
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import com.example.skilllink.R
+import com.example.skilllink.ui.navigation.Screens
 
 data class BottomNavItem(
     val title: String,
@@ -28,14 +29,14 @@ val bottomNavItemList = listOf(
         selectedIcon = Icons.Filled.Home,
         unselectedIcon = Icons.Outlined.Home,
         hasNews = false,
-        navigation = { }
+        navigation = { navController ->  navController.navigate(Screens.Home.HomeScreen)}
     ),
     BottomNavItem(
         title = "Search",
         selectedIcon = Icons.Filled.Search,
         unselectedIcon = Icons.Outlined.Search,
         hasNews = false,
-        navigation = {}
+        navigation = { navController -> navController.navigate(Screens.Search.SearchScreen) }
     ),
     BottomNavItem(
         title = "My Learning",
@@ -56,6 +57,6 @@ val bottomNavItemList = listOf(
         selectedIcon = Icons.Filled.AccountCircle,
         unselectedIcon = Icons.Outlined.AccountCircle,
         hasNews = false,
-        navigation = {}
+        navigation = { navController -> navController.navigate(Screens.Profile.ProfileScreen) }
     )
 )

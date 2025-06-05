@@ -130,7 +130,7 @@ fun FeedReelCard(
             } else {
                 Icon(
                     painter = painterResource(R.drawable.mic_off_icon),
-                    contentDescription = "volume on",
+                    contentDescription = "volume off",
                     tint = Color.Black,
                     modifier = Modifier
                         .size(24.dp)

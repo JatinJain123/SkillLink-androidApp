@@ -254,7 +254,7 @@ fun SignUp(
             customFields = customFields,
             isLoading = false
         ) {
-            navController.navigate(Screens.AuthScreens.UserNameScreen)
+            navController.navigate(Screens.Auth.UserNameScreen)
         }
     }
 }
@@ -301,7 +301,7 @@ fun Login(
             customFields = customFields,
             isLoading = false
         ) {
-            navController.navigate(Screens.AuthScreens.UserNameScreen)
+            navController.navigate(Screens.Auth.UserNameScreen)
         }
     }
 }
