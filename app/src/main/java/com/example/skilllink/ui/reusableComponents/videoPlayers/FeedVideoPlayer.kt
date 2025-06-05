@@ -30,7 +30,7 @@ fun FeedVideoPlayer(
             resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIXED_WIDTH
             useController = false
             player = exoPlayer
-            setShutterBackgroundColor(Color.LTGRAY)
+            setShutterBackgroundColor(Color.BLACK)
         }
     }
     AndroidView(factory = { playerView })

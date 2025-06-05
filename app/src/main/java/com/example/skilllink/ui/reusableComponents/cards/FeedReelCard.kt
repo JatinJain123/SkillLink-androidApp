@@ -55,6 +55,8 @@ fun FeedReelCard(
     reel: Reel,
     exoPlayer: ExoPlayer,
     isPlaying: Boolean,
+    mikeOn: Boolean,
+    onMikeClick: () -> Unit,
     customFields: CustomFields
 ) {
     var isExpanded by rememberSaveable(key = reel.id) { mutableStateOf(false) }
@@ -114,6 +116,28 @@ fun FeedReelCard(
                 videoPath = reel.contentUrl,
                 isPlaying = isPlaying
             )
+
+            if(mikeOn) {
+                Icon(
+                    painter = painterResource(R.drawable.mic_on_icon),
+                    contentDescription = "volume on",
+                    tint = Color.Black,
+                    modifier = Modifier
+                        .size(24.dp)
+                        .clickable { onMikeClick() }
+                        .align(Alignment.BottomEnd)
+                )
+            } else {
+                Icon(
+                    painter = painterResource(R.drawable.mic_off_icon),
+                    contentDescription = "volume on",
+                    tint = Color.Black,
+                    modifier = Modifier
+                        .size(24.dp)
+                        .clickable { onMikeClick() }
+                        .align(Alignment.BottomEnd)
+                )
+            }
         }
 
         Row(

@@ -69,8 +69,9 @@ fun ScreenView(
 ) {
     val customFields = LocalCustomColors.current
     var selectedNavItemIndex by rememberSaveable { mutableIntStateOf(0) }
+    var mikeOn by rememberSaveable { mutableStateOf(false) }
 
-    val exoPlayersPool = rememberExoPlayerPool(testReels)
+    val exoPlayersPool = rememberExoPlayerPool(reels = testReels, mikeOn = mikeOn)
     val listState = rememberLazyListState()
     val focusedIndex by remember {
         derivedStateOf {
@@ -148,6 +149,8 @@ fun ScreenView(
                         reel = reel,
                         exoPlayer = exoPlayer,
                         isPlaying = index == focusedIndex,
+                        mikeOn = mikeOn,
+                        onMikeClick = { mikeOn = !mikeOn },
                         customFields = customFields
                     )
                 }

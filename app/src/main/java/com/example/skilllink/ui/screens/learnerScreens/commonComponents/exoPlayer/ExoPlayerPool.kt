@@ -43,5 +43,11 @@ class ExoPlayerPool(
         players.clear()
     }
 
+    fun updateVolume(volume: Float) {
+        players.forEach {
+            it.value.volume = volume
+        }
+    }
+
     companion object { private const val PLAYERS_COUNT = 3 }
 }
