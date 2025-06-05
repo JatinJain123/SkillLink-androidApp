@@ -40,4 +40,16 @@ sealed class Screens {
         @Serializable
         data object ProfileScreen
     }
+
+
+    sealed class MyLearning {
+        @Serializable
+        data object MyLearningScreen
+    }
+
+
+    sealed class Creator {
+        @Serializable
+        data object CreatorScreen
+    }
 }

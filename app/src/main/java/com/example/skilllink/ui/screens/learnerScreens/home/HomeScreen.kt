@@ -13,7 +13,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -68,14 +67,20 @@ fun ScreenView(
     testReels: List<Reel>,
     navController: NavController
 ) {
+    // custom fields
     val customFields = LocalCustomColors.current
-    val uiStates = LocalUiStates.current
 
-    var selectedNavItemIndex by rememberSaveable { mutableIntStateOf(0) }
+    // ui states
+    val uiStates = LocalUiStates.current
     var mikeOn by rememberSaveable { mutableStateOf(uiStates.mikeOn) }
 
+    // loading exo player instances
     val exoPlayersPool = rememberExoPlayerPool(reels = testReels, mikeOn = mikeOn)
+
+    // creating list state of lazy Column
     val listState = rememberLazyListState()
+
+    // finding the reel which is closed to center
     val focusedIndex by remember {
         derivedStateOf {
             val layoutInfo = listState.layoutInfo
@@ -111,9 +116,7 @@ fun ScreenView(
         bottomBar = {
             BottomNavigationBar(
                 customFields = customFields,
-                navController = navController,
-                selectedItemIndex = selectedNavItemIndex,
-                onClick = { index -> selectedNavItemIndex = index }
+                navController = navController
             )
         }
     ) { innerPadding ->

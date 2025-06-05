@@ -8,9 +8,13 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.skilllink.ui.theme.CustomFields
 
 
@@ -18,21 +22,29 @@ import com.example.skilllink.ui.theme.CustomFields
 fun BottomNavigationBar(
     customFields: CustomFields,
     navController: NavController,
-    selectedItemIndex: Int,
-    onClick: (Int) -> Unit
 ) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+
     NavigationBar {
-        bottomNavItemList.forEachIndexed { index, bottomNavItem ->
+        bottomNavItemList.forEachIndexed { _, bottomNavItem ->
+            val isSelected = currentDestination?.hierarchy?.any { it.hasRoute(bottomNavItem.route::class) } == true
+
             NavigationBarItem(
-                selected = selectedItemIndex == index,
+                selected = isSelected,
                 onClick = {
-                    onClick(index)
-                    bottomNavItem.navigation(navController)
+                    navController.navigate(bottomNavItem.route) {
+                         /* popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        } */
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 },
                 label = {
                     Text(
                         text = bottomNavItem.title,
-                        color = if(selectedItemIndex == index) customFields.primaryTextColor else customFields.secondaryTextColor,
+                        color = if(isSelected) customFields.primaryTextColor else customFields.secondaryTextColor,
                         style = MaterialTheme.typography.bodyMedium,
                         textAlign = TextAlign.Center
                     )
@@ -50,24 +62,24 @@ fun BottomNavigationBar(
                     ) {
                         if(bottomNavItem.selectedIcon != null) {
                             when {
-                                selectedItemIndex == index -> { bottomNavItem.selectedIcon }
+                                isSelected -> { bottomNavItem.selectedIcon }
                                 else -> { bottomNavItem.unselectedIcon }
                             }?.let {
                                 Icon(
                                     imageVector = it,
                                     contentDescription = bottomNavItem.title,
-                                    tint = if(selectedItemIndex == index) customFields.primaryFocusedColor else customFields.primaryUnfocusedColor
+                                    tint = if(isSelected) customFields.primaryFocusedColor else customFields.primaryUnfocusedColor
                                 )
                             }
                         } else if(bottomNavItem.selectedIconDrawable != null) {
                             when {
-                                selectedItemIndex == index -> { bottomNavItem.selectedIconDrawable }
+                                isSelected -> { bottomNavItem.selectedIconDrawable }
                                 else -> { bottomNavItem.unselectedIconDrawable }
                             }?.let {
                                 Icon(
                                     painter = painterResource(it),
                                     contentDescription = bottomNavItem.title,
-                                    tint = if(selectedItemIndex == index) customFields.primaryFocusedColor else customFields.primaryUnfocusedColor
+                                    tint = if(isSelected) customFields.primaryFocusedColor else customFields.primaryUnfocusedColor
                                 )
                             }
                         }

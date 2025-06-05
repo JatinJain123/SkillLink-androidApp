@@ -11,8 +11,10 @@ import com.example.skilllink.ui.screens.authScreens.LoginScreen
 import com.example.skilllink.ui.screens.authScreens.SecretPinScreen
 import com.example.skilllink.ui.screens.authScreens.UserNameScreen
 import com.example.skilllink.ui.screens.learnerScreens.chatRoom.ChatRoomScreen
+import com.example.skilllink.ui.screens.learnerScreens.creator.CreatorScreen
 import com.example.skilllink.ui.screens.learnerScreens.home.HomeScreen
 import com.example.skilllink.ui.screens.learnerScreens.home.NotificationScreen
+import com.example.skilllink.ui.screens.learnerScreens.myLearning.MyLearningScreen
 import com.example.skilllink.ui.screens.learnerScreens.profile.ProfileScreen
 import com.example.skilllink.ui.screens.learnerScreens.search.SearchScreen
 import com.example.skilllink.utils.AppConstants
@@ -75,6 +77,16 @@ fun NavGraph() {
         // Search Courses Screen
         composable<Screens.Search.SearchScreen> {
             SearchScreen(navController = navController)
+        }
+
+        // Search Courses Screen
+        composable<Screens.MyLearning.MyLearningScreen> {
+            MyLearningScreen(navController = navController)
+        }
+
+        // Search Courses Screen
+        composable<Screens.Creator.CreatorScreen> {
+            CreatorScreen(navController = navController)
         }
 
         // Profile Screen

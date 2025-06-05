@@ -1,4 +1,4 @@
-package com.example.skilllink.ui.screens.learnerScreens.profile
+package com.example.skilllink.ui.screens.learnerScreens.creator
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,7 +13,7 @@ import com.example.skilllink.ui.screens.commonComponents.bottomBar.BottomNavigat
 import com.example.skilllink.ui.theme.LocalCustomColors
 
 @Composable
-fun ProfileScreen(
+fun CreatorScreen(
     navController: NavController
 ) {
     val customFields = LocalCustomColors.current
@@ -31,7 +31,7 @@ fun ProfileScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "this is learnerScreens / profile / ProfileScreen")
+            Text(text = "this is learnerScreens / creator / CreatorScreen")
         }
     }
 }
