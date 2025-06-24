@@ -60,21 +60,26 @@ class MainActivity : ComponentActivity() {
                 minDelay = true
             }
 
-            LaunchedEffect(userId) {
-                if(userId.isNotEmpty()) {
-                    val userPrefsStoreManager = UserPrefsStoreManagerProvider
-                        .provideUserPrefsStoreManager(context = applicationContext, userId = userId)
-                    val userPrefsStoreViewModelFactory = UserPrefsStoreViewModelFactory(userPrefsStoreManager)
+            LaunchedEffect(userId, email) {
+                if (userId.isNotBlank()) {
+                    try {
+                        val userPrefsStoreManager = UserPrefsStoreManagerProvider
+                            .provideUserPrefsStoreManager(context = applicationContext, userId = userId)
 
-                    userPrefsStoreViewModel = ViewModelProvider(
-                        this@MainActivity, userPrefsStoreViewModelFactory
-                    )[UserPrefsStoreViewModel::class.java]
+                        val factory = UserPrefsStoreViewModelFactory(userPrefsStoreManager)
 
-                    userPrefsStoreViewModel?.let {
-                        it.setId(userId)
-                        it.setEmail(email)
+                        userPrefsStoreViewModel = ViewModelProvider(
+                            this@MainActivity, factory
+                        )[UserPrefsStoreViewModel::class.java]
+
+                        userPrefsStoreViewModel?.apply {
+                            setId(userId)
+                            setEmail(email)
+                        }
+                        isLogged = true
+                    } catch (e: Exception) {
+                        e.stackTrace
                     }
-                    isLogged = true
                 } else {
                     isInitialSetupComplete = true
                 }

@@ -1,7 +1,7 @@
 package com.example.skilllink.di
 
 import com.example.skilllink.BuildConfig
-import com.example.skilllink.data.remote.AuthApi
+import com.example.skilllink.data.remote.AuthApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,12 +15,12 @@ import javax.inject.Singleton
 object AuthModule {
     @Provides
     @Singleton
-    fun providesAuthApi(): AuthApi {
+    fun providesAuthApi(): AuthApiService{
         return Retrofit
             .Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(AuthApi::class.java)
+            .create(AuthApiService::class.java)
     }
 }

@@ -8,7 +8,7 @@ sealed class Screens {
         data object LoginScreen
 
         @Serializable
-        data object UserNameScreen
+        data object UsernameScreen
 
         @Serializable
         data object SecretPinScreen

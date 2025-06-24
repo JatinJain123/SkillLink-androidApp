@@ -42,9 +42,9 @@ class UserPrefsStoreViewModel(
         }
     }
 
-    fun setHasSpin(hasSpin: Boolean) {
+    fun setHasSecretPin(hasSpin: Boolean) {
         viewModelScope.launch {
-            userPrefsStoreManager.setHasSpin(hasSpin)
+            userPrefsStoreManager.setHasSecretPin(hasSpin)
         }
     }
 

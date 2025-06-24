@@ -35,7 +35,7 @@ import com.example.skilllink.utils.AppConstants
 fun OtpInputField(
     otpLength: Int = 4,
     customFields: CustomFields,
-    onOtpComplete: (String) -> Unit
+    onOtpChange: (String) -> Unit
 ) {
     var otpValue by remember { mutableStateOf("") }
 
@@ -55,9 +55,7 @@ fun OtpInputField(
         onValueChange = { value ->
             if (value.length <= otpLength && value.all { it.isDigit() }) {
                 otpValue = value
-                if (value.length == otpLength) {
-                    onOtpComplete(value)
-                }
+                onOtpChange(value)
             }
         },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),

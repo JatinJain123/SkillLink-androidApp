@@ -6,18 +6,19 @@ import com.example.skilllink.domain.model.remote.SetSecretPinRequest
 import com.example.skilllink.domain.model.remote.SetUsernameRequest
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 
-interface AuthApi {
-    @POST("/auth/signup")
+interface AuthApiService {
+    @POST("/api/auth/signup")
     suspend fun signup(@Body request: LoginRequest): Response<AuthResponse>
 
-    @POST("/auth/login")
+    @POST("/api/auth/login")
     suspend fun login(@Body request: LoginRequest): Response<AuthResponse>
 
-    @POST("auth/setUsername")
+    @PATCH("/api/auth/user/username")
     suspend fun setUsername(@Body request: SetUsernameRequest): Response<AuthResponse>
 
-    @POST("auth/setSecretPin")
+    @PATCH("/api/auth/user/secret-pin")
     suspend fun setSecretPin(@Body request: SetSecretPinRequest): Response<AuthResponse>
 }

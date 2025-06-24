@@ -6,8 +6,8 @@ option java_multiple_files = true;
 message User {
   string id = 1;
   string email = 2;
-  string userName = 3;
-  bool has_spin = 4;
+  string username = 3;
+  bool has_secretPin = 4;
   string realName = 5;
   string bio = 6;
   string profile_image_path = 7;

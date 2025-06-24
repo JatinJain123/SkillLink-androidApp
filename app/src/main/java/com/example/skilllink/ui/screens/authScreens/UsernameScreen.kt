@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
@@ -41,7 +43,7 @@ import com.example.skilllink.domain.model.local.UiEvent
 import com.example.skilllink.ui.navigation.Screens
 import com.example.skilllink.ui.reusableComponents.Dots
 import com.example.skilllink.ui.reusableComponents.buttons.GradientButton
-import com.example.skilllink.ui.reusableComponents.inputFields.OtpInputField
+import com.example.skilllink.ui.reusableComponents.inputFields.StyledInputField
 import com.example.skilllink.ui.theme.LocalCustomColors
 import com.example.skilllink.ui.viewModels.AppStoreViewModel
 import com.example.skilllink.ui.viewModels.AuthViewModel
@@ -49,23 +51,23 @@ import com.example.skilllink.ui.viewModels.UserPrefsStoreViewModel
 import com.example.skilllink.utils.AppConstants
 
 @Composable
-fun SecretPinScreen(
+fun UsernameScreen(
     authViewModel: AuthViewModel,
     appStoreViewModel: AppStoreViewModel,
     userPrefsStoreViewModel: UserPrefsStoreViewModel?,
     navController: NavController
 ) {
     val customFields = LocalCustomColors.current
-    var secretPin by remember { mutableStateOf("") }
+    var username by remember { mutableStateOf("") }
     val isLoading by authViewModel.isLoading.collectAsState()
     val snackBarHostState = remember { SnackbarHostState() }
 
     LaunchedEffect(Unit) {
         authViewModel.uiEvent.collect { event ->
             if(event is UiEvent.ShowSnackBar) { snackBarHostState.showSnackbar(event.message) }
-            else if(event is UiEvent.NavigateToHomeScreen) {
-                navController.navigate(Screens.Home.HomeScreen) {
-                    popUpTo(route = Screens.Auth.SecretPinScreen) { inclusive = true }
+            else if(event is UiEvent.NavigateToSecretPinScreen) {
+                navController.navigate(Screens.Auth.SecretPinScreen) {
+                    popUpTo(route = Screens.Auth.UsernameScreen) { inclusive = true }
                     launchSingleTop = true
                 }
             }
@@ -138,7 +140,7 @@ fun SecretPinScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "Create SPin",
+                        text = "Add Username",
                         style = MaterialTheme.typography.headlineLarge,
                         color = customFields.primaryTextColor
                     )
@@ -146,7 +148,7 @@ fun SecretPinScreen(
                     Spacer(modifier = Modifier.height(customFields.largeSpacing))
 
                     Text(
-                        text = "The Secret Pin is important to maintain",
+                        text = "The Username is visible to others.",
                         style = MaterialTheme.typography.bodyMedium,
                         color = customFields.secondaryTextColor,
                         fontStyle = FontStyle.Italic
@@ -155,7 +157,7 @@ fun SecretPinScreen(
                     Spacer(modifier = Modifier.height(customFields.smallSpacing))
 
                     Text(
-                        text = "security and privacy",
+                        text = "Once set, it cannot be changed",
                         style = MaterialTheme.typography.bodyMedium,
                         color = customFields.secondaryTextColor,
                         fontStyle = FontStyle.Italic
@@ -175,22 +177,25 @@ fun SecretPinScreen(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    OtpInputField(
-                        customFields = customFields,
-                        onOtpChange = { otp -> secretPin = otp }
+                    StyledInputField(
+                        value = username,
+                        onValueChange = { username = it },
+                        label = "Username",
+                        isPassword = false,
+                        leadingIcon = Icons.Default.AccountCircle,
+                        customFields = customFields
                     )
 
                     Spacer(modifier = Modifier.height(customFields.extraLargeSpacing))
 
                     GradientButton(
-                        text = "Create",
+                        text = "Add",
                         customFields = customFields,
                         isLoading = isLoading
                     ) {
-                        val spinToIntValue = secretPin.toInt()
-                        if(spinToIntValue in 1000..9999) {
-                            authViewModel.setSecretPin(
-                                secretPin = spinToIntValue,
+                        if(username.isNotBlank()) {
+                            authViewModel.setUsername(
+                                username = username,
                                 appStoreViewModel = appStoreViewModel,
                                 userPrefsStoreViewModel = userPrefsStoreViewModel
                             )
@@ -210,9 +215,9 @@ fun SecretPinScreen(
             ) {
                 Dots(color = customFields.primaryUnfocusedColor, size = 8.dp)
                 Spacer(modifier = Modifier.width(customFields.smallSpacing))
-                Dots(color = customFields.primaryUnfocusedColor, size = 8.dp)
-                Spacer(modifier = Modifier.width(customFields.smallSpacing))
                 Dots(color = customFields.primaryFocusedColor, size = 16.dp)
+                Spacer(modifier = Modifier.width(customFields.smallSpacing))
+                Dots(color = customFields.primaryUnfocusedColor, size = 8.dp)
             }
         }
     }

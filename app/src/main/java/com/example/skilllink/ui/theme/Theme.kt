@@ -32,6 +32,8 @@ data class CustomFields(
     val iconTint: Color,
     val primaryFocusedColor: Color,
     val primaryUnfocusedColor: Color,
+    val snackBarBg: Color,
+    val snackBarTextColor: Color,
 
     /* padding values */
     val extraSmallPadding: Dp = 4.dp,
@@ -54,7 +56,9 @@ private val darkCustomFields = CustomFields(
     inverseBg = Color.White,
     iconTint = Color.LightGray,
     primaryFocusedColor = Color.White,
-    primaryUnfocusedColor = Color.LightGray
+    primaryUnfocusedColor = Color.LightGray,
+    snackBarBg = darkGray,
+    snackBarTextColor = Color.White
 )
 
 private val lightCustomFields = CustomFields(
@@ -63,7 +67,9 @@ private val lightCustomFields = CustomFields(
     inverseBg = Color.Black,
     iconTint = Color.DarkGray,
     primaryFocusedColor = Color.Black,
-    primaryUnfocusedColor = Color.DarkGray
+    primaryUnfocusedColor = Color.DarkGray,
+    snackBarBg = lightGray,
+    snackBarTextColor = Color.Black
 )
 
 val LocalCustomColors = staticCompositionLocalOf<CustomFields> {

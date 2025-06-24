@@ -1,6 +1,6 @@
 package com.example.skilllink.data.repositoryImpl
 
-import com.example.skilllink.data.remote.AuthApi
+import com.example.skilllink.data.remote.AuthApiService
 import com.example.skilllink.domain.model.remote.AuthResponse
 import com.example.skilllink.domain.model.remote.LoginRequest
 import com.example.skilllink.domain.model.remote.SetSecretPinRequest
@@ -12,11 +12,11 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
-    private val authApi: AuthApi
+    private val authApiService: AuthApiService
 ): AuthRepository {
     override suspend fun signup(request: LoginRequest): NetworkResult<AuthResponse> {
         try {
-            val response = authApi.signup(request = request)
+            val response = authApiService.signup(request = request)
             return checkResponse(response = response)
         } catch (e: Exception) {
             return NetworkResult.Error("ERROR: network call error ${e.message}")
@@ -25,7 +25,7 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun login(request: LoginRequest): NetworkResult<AuthResponse> {
         try {
-            val response = authApi.login(request = request)
+            val response = authApiService.login(request = request)
             return checkResponse(response = response)
         } catch (e: Exception) {
             return NetworkResult.Error("ERROR: network call error ${e.message}")
@@ -34,7 +34,7 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun setUsername(request: SetUsernameRequest): NetworkResult<AuthResponse> {
         try {
-            val response = authApi.setUsername(request = request)
+            val response = authApiService.setUsername(request = request)
             return checkResponse(response = response)
         } catch (e: Exception) {
             return NetworkResult.Error("ERROR: network call error ${e.message}")
@@ -43,7 +43,7 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun setSecretPin(request: SetSecretPinRequest): NetworkResult<AuthResponse> {
         try {
-            val response = authApi.setSecretPin(request = request)
+            val response = authApiService.setSecretPin(request = request)
             return checkResponse(response = response)
         } catch (e: Exception) {
             return NetworkResult.Error("ERROR: network call error ${e.message}")

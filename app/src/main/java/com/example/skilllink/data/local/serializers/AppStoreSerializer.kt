@@ -20,13 +20,11 @@ object AppStoreSerializer: Serializer<AppUser> {
         }
         val encryptedBytes = Base64.getDecoder().decode(encryptedBytesBase64)
         val bytes = Crypto.decrypt(encryptedBytes)
-        val json = bytes.decodeToString()
-        return Json.decodeFromString(json)
+        return AppUser.parseFrom(bytes)
     }
 
     override suspend fun writeTo(t: AppUser, output: OutputStream) {
-        val json = Json.encodeToString(t)
-        val bytes = json.toByteArray()
+        val bytes = t.toByteArray()
         val encryptedBytes = Crypto.encrypt(bytes)
         val encryptedBytesBase64 = Base64
             .getEncoder()

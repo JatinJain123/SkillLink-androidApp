@@ -22,13 +22,13 @@ class UserPrefsStoreManager(
 
     suspend fun setUsername(username: String) {
         userPrefsStore.updateData {
-            it.toBuilder().setUserName(username).build()
+            it.toBuilder().setUsername(username).build()
         }
     }
 
-    suspend fun setHasSpin(hasSpin: Boolean) {
+    suspend fun setHasSecretPin(hasSpin: Boolean) {
         userPrefsStore.updateData {
-            it.toBuilder().setHasSpin(hasSpin).build()
+            it.toBuilder().setHasSecretPin(hasSpin).build()
         }
     }
 
@@ -51,10 +51,10 @@ class UserPrefsStoreManager(
         .map{ it.email }
 
     val userName: Flow<String> = userPrefsStore.data
-        .map{ it.userName }
+        .map{ it.username }
 
     val hasSpin: Flow<Boolean> = userPrefsStore.data
-        .map{ it.hasSpin }
+        .map{ it.hasSecretPin }
 
     val lightMode: Flow<Boolean> = userPrefsStore.data
         .map{ it.lightMode }
